@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="form.css">
+    <title>Registration Form</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Join Us</h1>
+        <form id="registrationForm" action="Joining.html" method="post" target="_self" onsubmit="return validateForm()">
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required minlength="3" placeholder="Enter your full name">
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="Enter your phone number (10 digits)">
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required minlength="5" placeholder="Enter your address">
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required min="1" max="120" placeholder="Enter your age">
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="" disabled selected>Select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="package">Select Your Package:</label>
+            <select id="package" name="package" required>
+                <option value="" disabled selected>Select your package</option>
+                <option value="basic">Strength Training</option>
+                <option value="premium">Strength And Cardio Training</option>
+                <option value="deluxe">Personal Training</option>
+            </select>
+
+            <button type="submit">Join Now</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            const fullname = document.getElementById('fullname').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const age = document.getElementById('age').value;
+
+            // Validate Full Name
+            if (!isNaN(fullname)) {
+                alert("Full Name cannot contain numeric values.");
+                return false;
+            }
+            if (fullname.length < 3) {
+                alert("Full Name must be at least 3 characters long.");
+                return false;
+            }
+
+            // Validate Phone Number
+            const phonePattern = /^[0-9]{10}$/; // Regex for 10 digit phone number
+            if (!phonePattern.test(phone)) {
+                alert("Phone Number must be exactly 10 digits.");
+                return false;
+            }
+
+            // Validate Address
+            if (!isNaN(address)) {
+                alert("Address cannot contain numeric values.");
+                return false;
+            }
+            if (address.length < 5) {
+                alert("Address must be at least 5 characters long.");
+                return false;
+            }
+
+            // Validate Age
+            if (isNaN(age)) {
+                alert("Age must be a numeric value.");
+                return false;
+            }
+            if (age < 1 || age > 120) {
+                alert("Age must be between 1 and 120.");
+                return false;
+            }
+
+            return true; // Form is valid
+        }
+    </script>
+</body>
+</html>
